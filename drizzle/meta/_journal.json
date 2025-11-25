@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762769731246,
+      "tag": "0000_same_agent_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1762769797775,
+      "tag": "0001_light_sersi",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1762935726811,
+      "tag": "0002_broken_valkyrie",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1762937026365,
+      "tag": "0003_curly_starhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1763021090768,
+      "tag": "0004_daily_hedge_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1763189272024,
+      "tag": "0005_zippy_madame_hydra",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1763289897387,
+      "tag": "0006_crazy_spirit",
+      "breakpoints": true
+    }
+  ]
+}

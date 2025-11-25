@@ -1,0 +1,18 @@
+      uploadImage: protectedProcedure
+        .input(z.object({
+          fileData: z.string(),
+          fileName: z.string(),
+          mimeType: z.string(),
+        }))
+        .mutation(async ({ input, ctx }) => {
+          if (ctx.user.role !== "admin") throw new Error("Unauthorized");
+          const { storagePut } = await import("./storage");
+          
+          const buffer = Buffer.from(input.fileData, "base64");
+          const timestamp = Date.now();
+          const random = Math.floor(Math.random() * 10000);
+          const fileKey = `products/${timestamp}-${random}-${input.fileName}`;
+          
+          const { url } = await storagePut(fileKey, buffer, input.mimeType);
+          return { url, fileKey };
+        }),

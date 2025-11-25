@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Banco de Dados MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: morasio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-morasio_digital}
+      MYSQL_USER: ${MYSQL_USER:-morasio_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-morasio_pass}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - morasio-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root_password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Aplicação Node.js
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: morasio-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      DATABASE_URL: mysql://${MYSQL_USER:-morasio_user}:${MYSQL_PASSWORD:-morasio_pass}@mysql:3306/${MYSQL_DATABASE:-morasio_digital}
+      JWT_SECRET: ${JWT_SECRET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      OWNER_EMAIL: ${OWNER_EMAIL}
+      WHATSAPP_ACCOUNT_ID: ${WHATSAPP_ACCOUNT_ID}
+      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID}
+      WHATSAPP_ACCESS_TOKEN: ${WHATSAPP_ACCESS_TOKEN}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - morasio-network
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx (Reverse Proxy - Opcional)
+  nginx:
+    image: nginx:alpine
+    container_name: morasio-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - morasio-network
+    profiles:
+      - with-nginx
+
+networks:
+  morasio-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
