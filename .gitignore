@@ -1,11 +1,13 @@
 # Dependencies
-**/node_modules
+node_modules
 .pnpm-store/
+pnpm-lock.yaml
 
 # Build outputs
 dist/
 build/
 *.dist
+out/
 
 # Environment variables
 .env
@@ -20,8 +22,7 @@ build/
 *.swp
 *.swo
 *~
-
-# OS generated files
+*.sublime-workspace
 .DS_Store
 .DS_Store?
 ._*
@@ -45,15 +46,10 @@ pids
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
+# Coverage directory
 coverage/
 *.lcov
-
-# nyc test coverage
 .nyc_output
-
-# Dependency directories
-jspm_packages/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -79,18 +75,9 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# parcel-bundler cache
 .cache
 .parcel-cache
-
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-
-# Gatsby files
-.cache/
 
 # Storybook build outputs
 .out
@@ -104,3 +91,14 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# Vite
+.vite
+
+# Manus specific
+.manus-logs
+.browser_data_dir
+
+# OS
+.DS_Store
+Thumbs.db
