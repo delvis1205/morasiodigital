@@ -129,9 +129,9 @@ export default function Home() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover-lift"
-                  onClick={() => window.open('https://loja.morasio.shop', '_blank')}
+                  onClick={() => window.open('https://cursos.morasio.shop', '_blank')}
                 >
-                  Loja Online
+                  Cursos Online
                 </Button>
                 <Button
                   size="lg"
@@ -246,7 +246,7 @@ export default function Home() {
                   Morásio Shop
                 </h3>
                 <p className="text-slate-600">
-                  Loja online de produtos diversos
+                  Cursos online Com Certificados
                 </p>
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-center gap-2">
@@ -255,16 +255,16 @@ export default function Home() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500" />
-                    Facilidade de compra
+                    Facilidade de acesso
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500" />
-                    Produtos selecionados
+                    Cursos de Alta Qualidade
                   </li>
                 </ul>
                 <Button
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold mt-4 shadow-lg hover:shadow-xl transition-all"
-                  onClick={() => window.open('https://loja.morasio.shop', '_blank')}
+                  onClick={() => window.open('https://cursos.morasio.shop', '_blank')}
                 >
                   Visitar Loja
                   <ArrowRight className="w-4 h-4 ml-2" />
