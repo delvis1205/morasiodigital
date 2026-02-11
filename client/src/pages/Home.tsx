@@ -236,7 +236,7 @@ export default function Home() {
               </div>
             </Card>
 
-            {/* Morásio Shop */}
+            {/* Cursos Online  */}
             <Card className="p-8 border-0 bg-gradient-to-br from-white to-purple-50 shadow-xl hover-lift hover-glow-purple transition-all duration-300">
               <div className="space-y-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
