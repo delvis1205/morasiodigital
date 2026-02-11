@@ -266,7 +266,7 @@ export default function Home() {
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold mt-4 shadow-lg hover:shadow-xl transition-all"
                   onClick={() => window.open('https://cursos.morasio.shop', '_blank')}
                 >
-                  Visitar Loja
+                  Ver os Cursos
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
